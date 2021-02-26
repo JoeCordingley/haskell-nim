@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Joe Cordingley" />
+  <meta name="date" content="2005-03-22" />
+  <title>Nim, or final tagless and property testing by example</title>
+  <style type="text/css">
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="https://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="https://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Nim, or final tagless and property testing by example</h1>
+  <p class="author">
+Joe Cordingley
+  </p>
+  <p class="date">March 22, 2005</p>
+</div>
+<div id="preview" class="slide section level1">
+<h1>Preview</h1>
+<ul class="incremental">
+<li>Nim</li>
+</ul>
+<ul class="incremental">
+<li>How final tagless can help us</li>
+</ul>
+<ul class="incremental">
+<li>How property testing can be useful</li>
+</ul>
+</div>
+<div id="nim" class="slide section level1">
+<h1>Nim</h1>
+<h2 id="rules-to-single-pile-nim-or-the-subtraction-game">Rules to <strong>Single pile Nim</strong> or <strong>The Subtraction Game</strong></h2>
+<ul class="incremental">
+<li>At the start of the game there are 12 stones</li>
+<li>The aim of the game is to take the last stone</li>
+<li>Two players take turns to make their move</li>
+<li>Each move, a player may take 1, 2, or 3 marbles</li>
+</ul>
+</div>
+<div id="players" class="slide section level1">
+<h1>Players</h1>
+<table>
+<colgroup>
+<col width="55%" />
+<col width="44%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">scala</th>
+<th align="left">haskell</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>sealed trait Player</code>                         <code>case object PlayerOne extends Player</code>    <code>case object PlayerTwo extends Player</code>  </td>
+<td align="left"><code>data Player</code><br />
+<code>  = Player One</code><br />
+<code>  | Player Two</code><br />
+</td>
+</tr>
+<tr class="even">
+<td align="left"><code>def nextPlayer: Player =&gt; Player = {</code>       <code>  case PlayerOne =&gt; PlayerTwo</code> <br />
+<code>  case PlayerTwo =&gt; PlayerOne</code> <br />
+<code>}</code> <br />
+</td>
+<td align="left"><code>nextPlayer :: Player -&gt; Player</code><br />
+<code>nextPlayer PlayerOne = PlayerTwo</code><br />
+<code>nextPlayer PlayerTwo = PlayerOne</code><br />
+</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>implicit val showPlayer: Show[Player] = {</code> <br />
+<code>  case PlayerOne =&gt; "Player One"</code> <br />
+<code>  case PlayerTwo =&gt; "Player One"</code> <br />
+<code>}</code> <br />
+</td>
+<td align="left"><code>instance Show Player where</code><br />
+<code>  show PlayerOne = "Player One"</code><br />
+<code>  show PlayerTwo = "Player Two"</code><br />
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
