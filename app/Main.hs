@@ -1,6 +1,6 @@
 module Main where
 
-import           Nim1
+import           Nim2
 
 main :: IO ()
-main = nim
+main = nimMain

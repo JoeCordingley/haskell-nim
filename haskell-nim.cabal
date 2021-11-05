@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 1493f4c9997f27288b6c5a9ac708550d80f148e2a0b7ab0cd04f7c42da3ec4fa
+-- hash: 2a070ff4663945a4052a1e3babe0e3c45da41b5f76949ad6ea6eaeae00ce122a
 
 name:           haskell-nim
 version:        0.1.0.0
@@ -35,6 +35,7 @@ library
       src
   build-depends:
       base >=4.7 && <5
+    , mtl
   default-language: Haskell2010
 
 executable haskell-nim-exe
@@ -47,6 +48,7 @@ executable haskell-nim-exe
   build-depends:
       base >=4.7 && <5
     , haskell-nim
+    , mtl
   default-language: Haskell2010
 
 test-suite haskell-nim-test
@@ -58,7 +60,9 @@ test-suite haskell-nim-test
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      QuickCheck
-    , base >=4.7 && <5
+      base >=4.7 && <5
     , haskell-nim
+    , mtl
+    , tasty
+    , tasty-quickcheck
   default-language: Haskell2010
