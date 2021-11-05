@@ -1,5 +1,7 @@
 module Nim2
   ( nim
+  , Player
+  , nextPlayer
   ) where
 
 initialStones = 12
@@ -7,6 +9,8 @@ initialStones = 12
 data Player
   = PlayerOne
   | PlayerTwo
+  deriving Eq
+  
 
 nextPlayer :: Player -> Player
 nextPlayer PlayerOne = PlayerTwo
